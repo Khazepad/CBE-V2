@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS for the login page */
+.form-input {
+    @apply pl-10 w-full rounded-md border focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400;
+}
+
+/* Optional: Add custom styles for the email/password icons */
+.input-icon {
+    @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400;
+}
+
+/* Optional: Add animation for hover effects */
+.hover-transition {
+    @apply transition-all duration-200 ease-in-out;
+}
+
+/* Optional: Custom focus styles */
+input:focus {
+    @apply outline-none;
+}
+
+/* Optional: Custom button styles */
+.btn-primary {
+    @apply w-full bg-yellow-400 hover:bg-yellow-500 text-gray-800 py-2 px-4 rounded-md transition-colors duration-200;
+}
+
+/* Optional: Error state styling */
+.error-input {
+    @apply border-red-500 focus:ring-red-500 focus:border-red-500;
+}

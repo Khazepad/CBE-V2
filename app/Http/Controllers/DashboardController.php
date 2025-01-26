@@ -24,6 +24,10 @@ class DashboardController extends Controller
             'appointments' => [], // Replace with actual appointments
         ];
 
-        return view('dashboard', $data);
+        $name = $student->name; // Get the username of the authenticated user
+        $last_name = $student->last_name; // Get the username of the authenticated user
+
+
+        return view('dashboard', compact('data', 'name', 'last_name'));
     }
 }

@@ -10,7 +10,7 @@ class CheckStudentRole
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check() || Auth::user()->role !== 'student') {
+        if (!Auth::check() || Auth::user()->role !== 'Students') {
             Auth::logout();
             return redirect()->route('login')->withErrors([
                 'email' => 'This account does not have student access.',

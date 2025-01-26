@@ -1,0 +1,394 @@
+/* public/css/studentinfo.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 0.5rem;
+}
+
+.back-button, .apply-button, .next-button {
+    background-color: #666;
+    color: white;
+    border: none;
+    padding: 0.25rem 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    margin-left: 10px; /* Add margin to space out the buttons */
+    text-decoration: none; /* Remove underline */
+}
+
+.apply-button {
+    background-color: #28a745; /* Change the background color for the apply button */
+}
+
+.next-button {
+    background-color: #007bff; /* Change the background color for the next button */
+}
+
+.privacy-notice {
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 2rem;
+    max-width: 90%;
+    line-height: 1.4;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #000;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.form-content {
+    display: flex;
+    gap: 2rem;
+}
+
+.form-left, .form-right {
+    flex: 1;
+}
+
+.form-right {
+    margin-right: 180px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.form-group label {
+    width: 120px;
+    text-align: left;
+    padding-right: 1rem;
+}
+
+.form-group input[type="text"] {
+    padding: 0.25rem;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    width: 250px;
+}
+
+.birth-date-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.birth-date-group input {
+    width: 80px;
+}
+
+.radio-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.avatar-container {
+    position: absolute;
+    top: 15rem; /* Adjust this value to position the avatar correctly */
+    right: 4rem; /* Adjust this value to position the avatar correctly */
+    width: 150px;
+    height: 150px;
+    background-color: #666;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.clinical-form-content {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.clinical-form-left, .clinical-form-right {
+    flex: 1;
+}
+
+.clinical-form-right {
+    margin-left: auto;
+}
+
+.clinical-form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.clinical-form-group label {
+    width: 200px;
+    text-align: left;
+    padding-right: 1rem;
+}
+
+.clinical-form-group input[type="text"] {
+    padding: 0.25rem;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    width: 250px;
+}
+
+/* Additional styles for diagnostic section and modals */
+.diagnostic-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.form-select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 150px;
+}
+
+.search-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    background-color: #218838;
+}
+
+.diagnostic-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.diagnostic-table th,
+.diagnostic-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.diagnostic-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.select-btn,
+.upload-btn,
+.delete-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.select-btn {
+    background-color: #28a745;
+}
+
+.select-btn:hover {
+    background-color: #218838;
+}
+
+.upload-btn {
+    background-color: #0d6efd;
+}
+
+.upload-btn:hover {
+    background-color: #0b5ed7;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-body {
+    margin-bottom: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.file-hint {
+    display: block;
+    color: #6c757d;
+    font-size: 0.875rem;
+    margin-top: 4px;
+}
+
+.remarks-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.submit-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+}
+
+.cancel-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cancel-btn:hover {
+    background-color: #5a6268;
+}
+
+.file-preview {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    min-height: 100px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+    }
+
+    .form-select {
+        width: 100%;
+    }
+
+    .diagnostic-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .select-btn,
+    .upload-btn,
+    .delete-btn {
+        width: 100%;
+        margin-bottom: 4px;
+    }
+
+    .modal-content {
+        margin: 20% auto;
+        width: 95%;
+    }
+
+    .remarks-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

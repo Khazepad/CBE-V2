@@ -1,20 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Dashboard')
 
 @section('content')
-    <!-- Add Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .info-box {
-            width: 18%;
-            margin: 10px;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #f8f9fa;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
         .rectangle {
             width: 100%;
             height: 200px;
@@ -22,187 +11,391 @@
             margin: 20px auto;
             border-radius: 25px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .chart-container {
-            margin: 20px 0;
+        .welcome-text {
+            position: absolute;
+            left: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .calendar {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            width: 80%;
-            margin: auto;
-        }
-
-        .h1, h6 {
+        .welcome-text h6 {
             font-size: 24px;
             font-weight: bold;
-            justify-content: left;
+            margin: 0;
+        }
+
+        .welcome-text h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .rectangle img {
+            max-height: 200px;
+            max-width: 40%;
+            object-fit: contain;
+            margin-left: auto;
+            display: block;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+            padding: 0.75rem;
+        }
+
+        .status-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .status-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .status-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-count {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .progress {
+            height: 6px;
+            margin: 0.5rem 0;
+        }
+
+        .calendar-wrapper {
+            background: #ffc107;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 0.75rem;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.25rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.9);
+            border-radius: 4px;
+            font-weight: 500;
+            padding: 0.25rem;
+            font-size: 0.8rem;
+        }
+
+        .calendar-day.today {
+            background: #fff;
+            border: 2px solid #0d6efd;
+            font-weight: bold;
+        }
+
+        .calendar-day.other-month {
+            opacity: 0.5;
+        }
+
+        .appointments-section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            height: 100%;
+        }
+
+        @media (max-width: 1024px) {
+            .status-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .rectangle {
+                height: 180px;
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .welcome-text {
+                position: static;
+                margin-bottom: 0.75rem;
+                align-items: center;
+            }
+
+            .welcome-text h6 {
+                font-size: 20px;
+            }
+
+            .welcome-text h1 {
+                font-size: 28px;
+            }
+
+            .rectangle img {
+                max-height: 80px !important;
+                max-width: 100% !important;
+                margin: 0.5rem auto !important;
+                display: block;
+            }
+
+            .status-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                padding: 0.5rem;
+            }
+
+            .calendar-grid {
+                font-size: 0.8rem;
+                gap: 0.2rem;
+            }
+
+            .calendar-day {
+                padding: 0.2rem;
+            }
+
+            .row {
+                flex-direction: column;
+            }
+
+            .col-md-8, .col-md-4 {
+                width: 100%;
+                padding: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .rectangle {
+                height: 150px;
+                padding: 0.75rem;
+                margin: 10px auto;
+            }
+
+            .welcome-text h6 {
+                font-size: 18px;
+            }
+
+            .welcome-text h1 {
+                font-size: 24px;
+            }
+
+            .rectangle img {
+                max-height: 60px !important;
+            }
+
+            .status-card {
+                padding: 0.75rem;
+            }
+
+            .status-title {
+                font-size: 0.8rem;
+            }
+
+            .status-count {
+                font-size: 1.2rem;
+            }
+
+            .calendar-wrapper {
+                padding: 0.75rem;
+            }
         }
     </style>
 
-    <div class="rectangle" style="display: flex; justify-content: space-between;">
-        <h6 style="margin-left: 0; margin-bottom: 10px; margin-right: 399px;">WELCOME TO</h6>
-        <h1 style="margin-left: -1000px; margin-bottom: -80px;">STUDENT DASHBOARD</h1>
-        <img src="{{ asset('images/dep1.png') }}" alt="Description of image" class="img-fluid" style="max-height: 200px; margin-right: 400px;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        
+    <!-- /.content-header -->
+
+    <!-- Welcome Banner -->
+    <div class="rectangle">
+        <div class="welcome-text">
+            <h1>Welcome, {{ $name }} {{ $last_name }}!</h1>
+        </div>
+        <img src="{{ asset('images/dep1.png') }}" alt="Department Image" class="img-fluid">
     </div>
 
-    <div class="info-boxes d-flex flex-wrap justify-content-between">
-        <div class="info-box">
-            <h5>Approved</h5>
+    <!-- Status Cards -->
+    <div class="status-grid">
+        <div class="status-card">
+            <div class="status-title">Approved</div>
+            <div class="status-count">0</div>
             <div class="progress">
-                <div class="progress-bar bg-success" style="width: {{ ($approved / max($all, 1)) * 100 }}%"></div>
+                <div class="progress-bar bg-success" style="width: 0%"></div>
             </div>
-            <p class="mt-2">{{ $approved }} Applications</p>
+            <div>Applications</div>
         </div>
-        <div class="info-box">
-            <h5>Pending</h5>
+
+        <div class="status-card">
+            <div class="status-title">Pending</div>
+            <div class="status-count">0</div>
             <div class="progress">
-                <div class="progress-bar bg-warning" style="width: {{ ($pending / max($all, 1)) * 100 }}%"></div>
+                <div class="progress-bar bg-warning" style="width: 0%"></div>
             </div>
-            <p class="mt-2">{{ $pending }} Applications</p>
+            <div>Applications</div>
         </div>
-        <div class="info-box">
-            <h5>Draft</h5>
+
+        <div class="status-card">
+            <div class="status-title">Rejected</div>
+            <div class="status-count">0</div>
             <div class="progress">
-                <div class="progress-bar bg-secondary" style="width: {{ ($draft / max($all, 1)) * 100 }}%"></div>
+                <div class="progress-bar bg-danger" style="width: 0%"></div>
             </div>
-            <p class="mt-2">{{ $draft }} Applications</p>
+            <div>Applications</div>
         </div>
-        <div class="info-box">
-            <h5>All</h5>
+
+        <div class="status-card">
+            <div class="status-title">Archive</div>
+            <div class="status-count">0</div>
             <div class="progress">
-                <div class="progress-bar bg-info" style="width: 100%"></div>
+                <div class="progress-bar bg-light" style="width: 0%"></div>
             </div>
-            <p class="mt-2">{{ $all }} Applications</p>
-        </div>
-        <div class="info-box">
-            <h5>Rejected</h5>
-            <div class="progress">
-                <div class="progress-bar bg-danger" style="width: {{ ($rejected / max($all, 1)) * 100 }}%"></div>
-            </div>
-            <p class="mt-2">{{ $rejected }} Applications</p>
-        </div>
-        <div class="info-box">
-            <h5>Archive</h5>
-            <div class="progress">
-                <div class="progress-bar bg-light" style="width: {{ ($archive / max($all, 1)) * 100 }}%"></div>
-            </div>
-            <p class="mt-2">{{ $archive }} Applications</p>
+            <div>Applications</div>
         </div>
     </div>
 
-    <div class="d-flex justify-content-between">
-        <div class="chart-container" style="flex: 1;">
-            <h2>Upcoming Appointments</h2>
-            @if(count($appointments) > 0)
-                <ul class="list-group">
-                    @foreach($appointments as $appointment)
-                        <li class="list-group-item">
-                            {{ $appointment->title }} - {{ $appointment->date }}
-                        </li>
-                    @endforeach
-                </ul>
-            @else
+    <!-- Appointments and Calendar Section -->
+    <div class="row mt-3">
+        <div class="col-md-8">
+            <div class="appointments-section">
+                <h5 class="card-title mb-3">Upcoming Appointments</h5>
                 <p>No upcoming appointments</p>
-            @endif
+            </div>
         </div>
-
-        <div class="calendar" style="background-color: #ffc107; padding: 10px; border-radius: 10px; width: 25%; margin-left: 20px;">
-            @php
-                $defaultDate = Carbon\Carbon::now('Asia/Manila');
-                $requestedDate = request('date') ? Carbon\Carbon::parse(request('date')) : $defaultDate;
-                $today = Carbon\Carbon::now('Asia/Manila')->day;
-            @endphp
-
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <a href="?date={{ $requestedDate->copy()->subMonth()->format('Y-m') }}" class="btn btn-sm btn-light">&lt;</a>
-                <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 0;">
-                    {{ $requestedDate->format('F Y') }}
-                </h3>
-                <a href="?date={{ $requestedDate->copy()->addMonth()->format('Y-m') }}" class="btn btn-sm btn-light">&gt;</a>
-            </div>
-            
-            <table class="table table-bordered table-sm text-center">
-                <thead>
-                    <tr>
-                        <th>M</th>
-                        <th>T</th>
-                        <th>W</th>
-                        <th>T</th>
-                        <th>F</th>
-                        <th>S</th>
-                        <th>S</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $date = $requestedDate->copy()->startOfMonth();
-                        $daysInMonth = $date->daysInMonth;
-                        $firstDayOfWeek = $date->dayOfWeek;
-                        $firstDayOfWeek = $firstDayOfWeek == 0 ? 7 : $firstDayOfWeek;
-                    @endphp
-
-                    <tr>
-                        @for ($i = 1; $i < $firstDayOfWeek; $i++)
-                            <td></td>
-                        @endfor
-
-                        @for ($day = 1; $day <= $daysInMonth; $day++)
-                            @if ($firstDayOfWeek > 7)
-                                </tr><tr>
-                                @php $firstDayOfWeek = 1 @endphp
-                            @endif
-
-                            <td style="@if($day == $today && $requestedDate->format('Y-m') == $defaultDate->format('Y-m')) background-color: #fff3cd; font-weight: bold; 
-                                       @elseif(isset($holidays[sprintf('%02d-%02d', $requestedDate->format('m'), $day)])) background-color: #ffcccb; @endif">
-                                {{ $day }}
-                            </td>
-
-                            @php $firstDayOfWeek++ @endphp
-                        @endfor
-
-                        @while($firstDayOfWeek <= 7)
-                            <td></td>
-                            @php $firstDayOfWeek++ @endphp
-                        @endwhile
-                    </tr>
-                </tbody>
-            </table>
-            
-            <!-- Year Navigation -->
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <a href="?date={{ $requestedDate->copy()->subYears(2)->format('Y-m') }}" class="btn btn-sm btn-light">{{ $requestedDate->copy()->subYears(2)->format('Y') }}</a>
-                <a href="?date={{ $requestedDate->copy()->subYear()->format('Y-m') }}" class="btn btn-sm btn-light">{{ $requestedDate->copy()->subYear()->format('Y') }}</a>
-                <span class="btn btn-sm btn-warning">{{ $requestedDate->format('Y') }}</span>
-                <a href="?date={{ $requestedDate->copy()->addYear()->format('Y-m') }}" class="btn btn-sm btn-light">{{ $requestedDate->copy()->addYear()->format('Y') }}</a>
-                <a href="?date={{ $requestedDate->copy()->addYears(2)->format('Y-m') }}" class="btn btn-sm btn-light">{{ $requestedDate->copy()->addYears(2)->format('Y') }}</a>
-            </div>
-
-
-            <div class="d-flex justify-content-start mt-2" style="font-size: 12px;">
-                <div class="mr-3">
-                    <span style="display: inline-block; width: 12px; height: 12px; background-color: #fff3cd; margin-right: 5px;"></span>
-                    Today
+        <div class="col-md-4">
+            <div class="calendar-wrapper">
+                <div class="calendar-header">
+                    <button class="btn btn-light btn-sm" id="prevMonth">&lt;</button>
+                    <h3 id="currentMonth" class="mb-0" style="font-size: 1rem;"></h3>
+                    <button class="btn btn-light btn-sm" id="nextMonth">&gt;</button>
                 </div>
-                <div>
-                    <span style="display: inline-block; width: 12px; height: 12px; background-color: #ffcccb; margin-right: 5px;"></span>
-                    Holiday
+                <div class="calendar-grid" id="calendarGrid">
+                    <div class="calendar-day">Mon</div>
+                    <div class="calendar-day">Tue</div>
+                    <div class="calendar-day">Wed</div>
+                    <div class="calendar-day">Thu</div>
+                    <div class="calendar-day">Fri</div>
+                    <div class="calendar-day">Sat</div>
+                    <div class="calendar-day">Sun</div>
                 </div>
             </div>
         </div>
     </div>
 
-    @if(session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentDate = new Date();
+            let currentMonth = currentDate.getMonth();
+            let currentYear = currentDate.getFullYear();
+
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            function updateCalendar() {
+                const firstDay = new Date(currentYear, currentMonth, 1);
+                const lastDay = new Date(currentYear, currentMonth + 1, 0);
+                const startingDay = firstDay.getDay() || 7; // Convert Sunday from 0 to 7
+                const monthLength = lastDay.getDate();
+
+                document.getElementById('currentMonth').textContent =
+                    `${monthNames[currentMonth]} ${currentYear}`;
+
+                const calendarGrid = document.getElementById('calendarGrid');
+                const headerRow = calendarGrid.innerHTML.split('</div>').slice(0, 7).join('</div>') + '</div>';
+                calendarGrid.innerHTML = headerRow;
+
+                // Previous month's days
+                const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
+                for (let i = startingDay - 2; i >= 0; i--) {
+                    calendarGrid.innerHTML += `
+                        <div class="calendar-day other-month">
+                            ${prevMonthLastDay - i}
+                        </div>
+                    `;
+                }
+
+                // Current month's days
+                const today = new Date();
+                for (let i = 1; i <= monthLength; i++) {
+                    const isToday = today.getDate() === i &&
+                                  today.getMonth() === currentMonth &&
+                                  today.getFullYear() === currentYear;
+                    calendarGrid.innerHTML += `
+                        <div class="calendar-day ${isToday ? 'today' : ''}">
+                            ${i}
+                        </div>
+                    `;
+                }
+
+                // Next month's days
+                const remainingDays = 42 - (startingDay - 1) - monthLength;
+                for (let i = 1; i <= remainingDays; i++) {
+                    calendarGrid.innerHTML += `
+                        <div class="calendar-day other-month">
+                            ${i}
+                        </div>
+                    `;
+                }
+            }
+
+            document.getElementById('prevMonth').addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                updateCalendar();
+            });
+
+            document.getElementById('nextMonth').addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                updateCalendar();
+            });
+
+            // Initial calendar render
+            updateCalendar();
+        });
+    </script>
 @endsection

@@ -1,0 +1,175 @@
+/* public/css/student-profile.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+    background-color: #fff;
+    color: #333;
+    line-height: 1.6;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 0.5rem;
+}
+
+.back-button {
+    background-color: #666;
+    color: white;
+    border: none;
+    padding: 0.25rem 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.privacy-notice {
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 2rem;
+    max-width: 90%;
+    line-height: 1.4;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #000;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.form-content {
+    display: flex;
+    gap: 2rem;
+}
+
+.form-left, .form-right {
+    flex: 1;
+}
+
+.form-right {
+    margin-right: 180px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.form-group label {
+    width: 120px;
+    text-align: left;
+    padding-right: 1rem;
+}
+
+.form-group input[type="text"] {
+    padding: 0.25rem;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    width: 250px;
+}
+
+.birth-date-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.birth-date-group input {
+    width: 80px;
+}
+
+.radio-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.avatar-container {
+    position: absolute;
+    top: 12rem; /* Adjust this value to position the avatar correctly */
+    right: 2rem; /* Adjust this value to position the avatar correctly */
+    width: 150px;
+    height: 150px;
+    background-color: #666;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.clinical-form-content {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.clinical-form-left, .clinical-form-right {
+    flex: 1;
+}
+
+.clinical-form-right {
+    margin-left: auto;
+}
+
+.clinical-form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.clinical-form-group label {
+    width: 200px;
+    text-align: left;
+    padding-right: 1rem;
+}
+
+.clinical-form-group input[type="text"] {
+    padding: 0.25rem;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    width: 250px;
+}

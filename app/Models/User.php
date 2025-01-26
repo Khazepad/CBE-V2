@@ -2,56 +2,61 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
+        'last_name',
+        'middle_name',
         'email',
         'password',
+        'birthdate',
         'profile_image',
+        'role_id',
+        'program_id' // Add program_id here
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'birthdate' => 'date',
+    ];
+
+    // Define the relationship with the Role model
+    public function role()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(Role::class);
     }
 
-    public function appointments()
+    // Define the relationship with the Program model
+    public function program()
     {
-        return $this->belongsToMany(Appointment::class, 'appointment_student')
-                    ->withTimestamps();
+        return $this->belongsTo(Program::class);
     }
+
+    // Define the relationship for appointments where the user is the regular user
+    public function appointmentsAsUser()
+    {
+        return $this->hasMany(Appointment::class, 'user_id');
+    }
+
+    // Define the relationship for appointments where the user is the admin
+    public function appointmentsAsAdmin()
+    {
+        return $this->hasMany(Appointment::class, 'admin_id');
+    }
+
     public function available_dates()
     {
         return $this->hasMany(AvailableDate::class);

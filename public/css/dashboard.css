@@ -1,0 +1,261 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Layout */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar-container {
+    width: 200px;
+    background-color: #b6befc;
+    color: white;
+    position: relative;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    font-family: 'Arial Black', Arial, sans-serif;
+    transition: width 0.3s;
+}
+
+.sidebar-container.collapsed {
+    width: 60px; /* Collapsed width */
+}
+
+.sidebar-container.mobile-open {
+    width: 200px; /* Open width on mobile */
+}
+
+.sidebar-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/img/sidebar.png');
+    background-size: contain;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Header with Logo */
+.sidebar-header {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+    font-family: 'Arial Black', Arial, sans-serif;
+    position: relative;
+}
+
+.sidebar-header .fas.fa-bars {
+    position: absolute;
+    top: 10px; /* Adjust this value to move the icon higher */
+    left: 220px; /* Adjust this value to move the icon to the right */
+    font-size: 24px; /* Adjust the size of the icon */
+    cursor: pointer;
+    color: black; /* Change the color to black */
+    transition: left 0.3s;
+}
+
+.sidebar-container.collapsed .sidebar-header .fas.fa-bars {
+    left: 80px; /* Move the icon to the left when collapsed */
+}
+
+.logo-img {
+    width: 160px;
+    height: 58px;
+}
+
+/* Navigation */
+.sidebar-nav-menu {
+    list-style: none;
+    padding: 0.5rem 0;
+    flex-grow: 1;
+    font-family: 'Arial Black', Arial, sans-serif;
+}
+
+.sidebar-nav-item {
+    margin: 0.3rem 0.5rem;
+}
+
+.sidebar-nav-link {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 0.75rem 1rem;
+    transition: background-color 0.2s, color 0.2s;
+    font-size: 0.7rem;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial Black', Arial, sans-serif;
+}
+
+.sidebar-nav-link .fas {
+    margin-right: 10px; /* Add some space between the icon and the text */
+}
+
+.sidebar-container.collapsed .sidebar-nav-link span {
+    display: none; /* Hide the text when collapsed */
+}
+
+.sidebar-nav-link:hover {
+    background-color: #f8f9fa;
+    color: #00008B;
+}
+
+.sidebar-nav-link.active {
+    background-color: #f0f0f0;
+    color: #00008B;
+}
+
+/* Submenu */
+.sidebar-submenu {
+    display: none;
+    list-style: none;
+    padding-left: 1rem;
+    background-color: #e9ecef; /* Light background color for submenu */
+    border-radius: 5px;
+    margin-top: 0.5rem;
+}
+
+.submenu-open > .sidebar-submenu {
+    display: block;
+}
+
+.sidebar-container.collapsed .sidebar-submenu {
+    display: none; /* Ensure submenu is hidden when sidebar is collapsed */
+}
+
+.sidebar-submenu-link {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 0.75rem 1rem;
+    transition: background-color 0.2s, color 0.2s;
+    font-size: 0.7rem;
+    background-color: #e9ecef; /* Light background color for submenu items */
+    border-radius: 5px;
+    font-family: 'Arial Black', Arial, sans-serif;
+}
+
+.sidebar-submenu-link:hover {
+    background-color: #d3d3d3;
+    color: #00008B;
+}
+
+/* Logout */
+.sidebar-logout-container {
+    margin-top: auto;
+    padding: 0.5rem 0.5rem;
+    font-family: 'Arial Black', Arial, sans-serif;
+}
+
+.sidebar-logout-link {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 0.75rem 1rem;
+    font-size: 0.7rem;
+    transition: background-color 0.2s, color 0.2s;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial Black', Arial, sans-serif;
+}
+
+.sidebar-logout-link:hover {
+    background-color: #f8f9fa;
+    color: #00008B;
+}
+
+.sidebar-container.collapsed .sidebar-logout-container .sidebar-logout-link span {
+    display: none; /* Hide the logout text when collapsed */
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 0;
+    padding: 2rem;
+    background-color: #f4f6f9;
+    font-family: 'Arial Black', Arial, sans-serif;
+    transition: margin-left 0.3s;
+}
+
+.page-title {
+    font-size: 1.875rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    font-family: 'Arial Black', Arial, sans-serif;
+}
+
+/* Responsive Design */
+@media (min-width: 769px) {
+    .wrapper {
+        flex-direction: row;
+    }
+
+    .sidebar-container {
+        position: fixed;
+        height: 100vh;
+    }
+
+    .main-content {
+        margin-left: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-container {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    .sidebar-nav-menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .sidebar-nav-link, .sidebar-logout-link {
+        padding: 0.5rem;
+        flex: 1 1 45%;
+        margin: 0.5rem;
+        text-align: center;
+        font-size: 0.6rem;
+    }
+
+    .page-title {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .logo-img {
+        width: 100px;
+        height: 36px;
+    }
+}

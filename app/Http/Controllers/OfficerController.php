@@ -21,14 +21,13 @@ class OfficerController extends Controller
         ]);
 
         // Check if user exists and has officer or teacher role
-$user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
 
-if (!$user || !in_array($user->role, ['officer', 'teacher'])) {
-    return back()->withErrors([
-        'email' => 'This account does not have officer or teacher privileges.',
-    ])->onlyInput('email');
-}
-
+        if (!$user || !in_array($user->role->role_name, ['Admin', 'Teacher'])) {
+            return back()->withErrors([
+                'email' => 'This account does not have officer or teacher privileges.',
+            ])->onlyInput('email');
+        }
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -41,17 +40,19 @@ if (!$user || !in_array($user->role, ['officer', 'teacher'])) {
     }
 
     public function dashboard()
-{
-    if (!Auth::check() || !in_array(Auth::user()->role, ['officer', 'teacher'])) {
-        Auth::logout();
-        return redirect()->route('officer.login')->withErrors([
-            'email' => 'You do not have permission to access this area.',
-        ]);
-    }
+    {
+        if (!Auth::check() || !in_array(Auth::user()->role->role_name, ['Admin', 'Teacher'])) {
+            Auth::logout();
+            return redirect()->route('officer.login')->withErrors([
+                'email' => 'You do not have permission to access this area.',
+            ]);
+        }
 
         // Get your actual data from the database
         $data = [
-            'totalStudents' => User::where('role', 'student')->count(),
+            'totalStudents' => User::whereHas('role', function ($query) {
+                $query->where('role_name', 'Students');
+            })->count(),
             'pendingApplications' => 0, // Add your logic here
             'approvedApplications' => 0, // Add your logic here
             'rejectedApplications' => 0, // Add your logic here

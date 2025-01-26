@@ -1,94 +1,99 @@
-* {
-    box-sizing: border-box;
+body, html {
     margin: 0;
     padding: 0;
+    height: 100%;
     font-family: Arial, sans-serif;
+    background-color: #afcbd6; /* Bagong background color para sa body */
 }
 
-body {
+.container {
     display: flex;
+    height: 100%;
+    background-color: #afcbd6; /* Bagong background color para sa container */
+}
+
+
+.login-form {
+    width: 400px;
+    padding: 40px;
+    background-color: #afc8e9; /* Bagong background color para sa login form */
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: #f0f0f0;
-    
+    border: 2px solid #afcbd6; /* Bagong border color para sa login form */
+    border-radius: 8px; /* Bagong border radius para sa login form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bagong box shadow para sa login form */
 }
 
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f0f0;
-}
-
-.login-box {
-    width: 300px;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
-
-.login-box h2 {
-    margin-bottom: 10px;
-    color: #f1c40f;
-}
-
-.login-box p {
-    color: #888;
-    margin-bottom: 20px;
+.logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 30px;
 }
 
 .form-group {
-    margin-bottom: 15px;
-    text-align: left;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-.form-group label {
+label {
     display: block;
+    margin-bottom: 5px;
+    color: #333333; /* Bagong text color para sa labels */
     font-size: 14px;
-    color: #555;
 }
 
-.form-group input {
+input {
     width: 100%;
     padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 1px solid #aaaaaa; /* Bagong border color para sa inputs */
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #f9f9f9; /* Bagong background color para sa inputs */
 }
 
-.btn-signin {
+button {
     width: 100%;
-    padding: 10px;
-    background-color: #f1c40f;
-    border: none;
-    border-radius: 5px;
+    padding: 12px;
+    background-color: #003b7a; /* Bagong background color para sa button */
     color: white;
+    border: none;
+    border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Bagong box shadow para sa button */
 }
 
-.btn-signin:hover {
-    background-color: #e1b30e;
+button:hover {
+    background-color: #0056b3; /* Bagong background color para sa button kapag nahohover */
 }
 
-.links {
+.forgot-password {
+    display: block;
+    text-align: center;
     margin-top: 15px;
-}
-
-.links a {
-    display: inline-block;
-    color: #888;
-    font-size: 14px;
+    color: #fdfdfd; /* Bagong text color para sa forgot password link */
     text-decoration: none;
-    margin: 0 10px;
-    transition: color 0.3s;
+    font-size: 14px;
 }
 
-.links a:hover {
-    color: #555;
+.forgot-password:hover {
+    text-decoration: underline; /* Bagong style para sa forgot password link kapag nahohover */
+}
+.logo-img {
+    width: 160px;
+    height: 58px;
+}
+/* Sidebar */
+.sidebar {
+    width: 180px;
+    background-color: #b6befc;
+    color: white;
+    position: fixed;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
 }

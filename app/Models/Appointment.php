@@ -9,24 +9,15 @@ class Appointment extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'student_id',
-        'teacher_id',
-        'preferred_date_time',
-        'scheduled_date_time',
-        'flexible_availability',
-        'comments',
-        'feedback',
-        'status',
-    ];
+    protected $fillable = ['admin_id', 'user_id', 'purpose', 'appointment_date', 'appointment_time', 'booking_reference_number'];
 
-    public function student()
+    public function admin()
     {
-        return $this->belongsTo(User::class, 'student_id');
+        return $this->belongsTo(User::class, 'admin_id');
     }
 
-    public function teacher()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'teacher_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
